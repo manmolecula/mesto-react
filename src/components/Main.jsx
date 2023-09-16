@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import api from '../utils/Api';
+import { api } from '../utils/Api';
 import Card from "./Card";
 import trashIconImg from '../images/Trash.svg';
 function Main(props) {
