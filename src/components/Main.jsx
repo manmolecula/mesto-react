@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import Api from "../utils/Api";
+import Api from "../utils/api";
 import configApi from '../utils/const';
 import Card from "./Card";
 import trashIconImg from '../images/Trash.svg';
