@@ -1,30 +1,30 @@
-import {configApi} from './const';
-class Api{
-    constructor(config){
+import { configApi } from './const';
+class Api {
+    constructor(config) {
         this._url = config.url;
         this._headers = config.headers;
     }
 
-    _onResponse(res){
+    _onResponse(res) {
         return res.ok ? res.json() : res.json().then(errData => Promise.reject(errData))
     }
 
-    getAllInfo(){
+    getAllInfo() {
         return Promise.all([this.getUserInfo(), this.getInitialCards()])
     }
 
-    getUserInfo(){
+    getUserInfo() {
         return fetch(`${this._url}/users/me`, {
             headers: this._headers
         })
-        .then(this._onResponse)
+            .then(this._onResponse)
     }
 
-    getInitialCards(){
+    getInitialCards() {
         return fetch(`${this._url}/cards`, {
             headers: this._headers
         })
-        .then(this._onResponse)
+            .then(this._onResponse)
     }
 
     changeLike(cardId, isLiked) {
@@ -32,10 +32,10 @@ class Api{
             method: isLiked ? 'DELETE' : 'PUT',
             headers: this._headers,
         })
-        .then(this._onResponse)
+            .then(this._onResponse)
     }
 
-    editProfile(data){
+    editProfile(data) {
         return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
@@ -44,10 +44,10 @@ class Api{
                 about: data.info,
             })
         })
-        .then(this._onResponse)
+            .then(this._onResponse)
     }
 
-    editProfileAvatar(link){
+    editProfileAvatar(link) {
         return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
@@ -55,10 +55,10 @@ class Api{
                 avatar: link.avatar
             })
         })
-        .then(this._onResponse)
+            .then(this._onResponse)
     }
 
-    postNewCard(data){
+    postNewCard(data) {
         return fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: this._headers,
@@ -67,16 +67,17 @@ class Api{
                 link: data.link
             })
         })
-        .then(this._onResponse)
+            .then(this._onResponse)
     }
 
-    deleteCard(cardId){
+    deleteCard(cardId) {
         return fetch(`${this._url}/cards/${cardId}`, {
             method: 'DELETE',
             headers: this._headers
         })
-        .then(this._onResponse)
+            .then(this._onResponse)
     }
 }
 
-export const apiClass = new Api(configApi);
+const api = new Api(configApi);
+export default api;

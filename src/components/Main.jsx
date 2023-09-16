@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { apiClass } from "../utils/Api";
+import api from '../utils/Api';
 import Card from "./Card";
 import trashIconImg from '../images/Trash.svg';
 function Main(props) {
@@ -11,13 +11,13 @@ function Main(props) {
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        apiClass.getUserInfo()
+        api.getUserInfo()
             .then((data) => {
                 setUserName(data.name);
                 setUserDescription(data.about);
                 setUserAvatar(data.avatar);
             })
-        apiClass.getInitialCards()
+        api.getInitialCards()
             .then((data) => {
                 setCards(data);
             })
