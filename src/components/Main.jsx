@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Api } from '../utils/Api';
-import { configApi } from './const';
+import Api from "../utils/Api";
+import configApi from '../utils/const';
 import Card from "./Card";
 import trashIconImg from '../images/Trash.svg';
 function Main(props) {
