@@ -26,11 +26,11 @@ function App() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
 
-  function handleCardClick(card){
+  function handleCardClick(card) {
     setSelectedCard(card);
   }
 
-  function closeAllPopups(){
+  function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -50,7 +50,7 @@ function App() {
         />
         <Footer />
 
-        <PopupWithForm isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} name='add' title='Новое место' buttonText = "Создать">
+        <PopupWithForm isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} name='add' title='Новое место' buttonText="Создать">
           <div className="popup__input-span">
             <input required minLength="2" maxLength="30" id="form-title" className="popup__input popup__input_profile_name" name="title" type="text" placeholder="Название" />
             <span id="title-error" className="popup__error"></span>
@@ -61,7 +61,7 @@ function App() {
           </div>
         </PopupWithForm>
 
-        <PopupWithForm isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} name='edit' title='Редактировать профиль' buttonText = "Сохранить">
+        <PopupWithForm isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} name='edit' title='Редактировать профиль' buttonText="Сохранить">
           <div className="popup__input-span">
             <input required minLength="2" maxLength="40" id="form-name" className="popup__input popup__input_profile_name" name="name" type="text" placeholder="Введите новое имя" />
             <span id="name-error" className="popup__error"></span>
@@ -72,17 +72,17 @@ function App() {
           </div>
         </PopupWithForm>
 
-        <PopupWithForm isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} name='avatar' title='Обновить аватар' buttonText = "Создать">
+        <PopupWithForm isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} name='avatar' title='Обновить аватар' buttonText="Создать">
           <div className="popup__input-span">
             <input required id="form-avatar-link" className="popup__input popup__input_profile_subtitle" name="avatar" type="url" placeholder="Ссылка на картинку" />
             <span id="avatar-error" className="popup__error"></span>
           </div>
         </PopupWithForm>
 
-        <PopupWithForm name='sure' title='Вы уверены?' onClose={closeAllPopups} buttonText = "Да">
+        <PopupWithForm name='sure' title='Вы уверены?' onClose={closeAllPopups} buttonText="Да">
         </PopupWithForm>
-        
-        <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>
     </body>
   );
