@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { api } from '../utils/Api';
+import { Api } from '../utils/Api';
+import { configApi } from './const';
 import Card from "./Card";
 import trashIconImg from '../images/Trash.svg';
 function Main(props) {
@@ -9,6 +10,8 @@ function Main(props) {
     const [userDescription, setUserDescription] = useState();
     const [userAvatar, setUserAvatar] = useState();
     const [cards, setCards] = useState([]);
+
+    const api = new Api(configApi);
 
     useEffect(() => {
         api.getUserInfo()

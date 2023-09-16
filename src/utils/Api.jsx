@@ -1,4 +1,3 @@
-import { configApi } from './const';
 export class Api {
     constructor(config) {
         this._url = config.url;
@@ -78,5 +77,3 @@ export class Api {
             .then(this._onResponse)
     }
 }
-
-export const api = new Api(configApi);
