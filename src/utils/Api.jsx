@@ -1,5 +1,5 @@
-import configApi from './const';
-class Api {
+import { configApi } from './const';
+export class Api {
     constructor(config) {
         this._url = config.url;
         this._headers = config.headers;
