@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../index.css';
+import {Api} from '../utils/Api';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
