@@ -20,6 +20,7 @@ function Main(props) {
                 setUserDescription(data.about);
                 setUserAvatar(data.avatar);
             })
+            .catch(err => console.log(err));
         api.getInitialCards()
             .then((data) => {
                 setCards(data);

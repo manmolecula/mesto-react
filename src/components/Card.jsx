@@ -6,9 +6,9 @@ function Card(props) {
     }
 
     return (
-        <li key={props.key} className="elements__el">
+        <li className="elements__el">
             <img src={props.trashIcon} alt="Удалить" className="elements__trash" />
-            <img onClick={handleClick} id="new-img" src={props.link} className="elements__img" />
+            <img onClick={handleClick} alt={props.name} id="new-img" src={props.link} className="elements__img" />
             <div className="elements__subtitle">
                 <h2 id="new-place" className="elements__place">{props.name}</h2>
                 <ul className="elements__likelist">
