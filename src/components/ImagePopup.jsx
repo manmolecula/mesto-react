@@ -1,5 +1,4 @@
 function ImagePopup(props) {
-  console.log(props.card)
   return (
     <section id="popup-img" className={props.card === null ? "popup popup_place_img" : "popup popup_place_img popup_active"}>
       <div className="popup__img-container">
