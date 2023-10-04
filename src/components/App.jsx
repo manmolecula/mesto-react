@@ -5,6 +5,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
 import { Api } from '../utils/api';
 import configApi from '../utils/const';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -42,11 +43,19 @@ function App() {
     .catch(err => console.log(err));
   }
 
+  function handleUpdateUser(name, about){
+    api.editProfile(name, about)
+    .then((data)=>{
+      setCurrentUser(data);
+    })
+    .catch(err => console.log(err));
+  }
+
   function handleCardDelete(card) {
     api.deleteCard(card._id)
       .then(() => {
         setCards((cards) => {
-          cards.filter(item => item._id !== card._id);
+          return cards.filter(item => item._id !== card._id);
         });
       })
       .catch(err => console.log(err));
@@ -102,16 +111,7 @@ function App() {
             </div>
           </PopupWithForm>
 
-          <PopupWithForm isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} name='edit' title='Редактировать профиль' buttonText="Сохранить">
-            <div className="popup__input-span">
-              <input required minLength="2" maxLength="40" id="form-name" className="popup__input popup__input_profile_name" name="name" type="text" placeholder="Введите новое имя" />
-              <span id="name-error" className="popup__error"></span>
-            </div>
-            <div className="popup__input-span">
-              <input required minLength="2" maxLength="200" id="form-sub" className="popup__input popup__input_profile_subtitle" name="info" type="text" placeholder="Введите новое описание" />
-              <span id="info-error" className="popup__error"></span>
-            </div>
-          </PopupWithForm>
+          <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
           <PopupWithForm isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} name='avatar' title='Обновить аватар' buttonText="Создать">
             <div className="popup__input-span">

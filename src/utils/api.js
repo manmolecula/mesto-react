@@ -34,13 +34,13 @@ class Api {
             .then(this._onResponse)
     }
 
-    editProfile(data) {
+    editProfile({name, about}) {
         return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: data.name,
-                about: data.info,
+                name,
+                about,
             })
         })
             .then(this._onResponse)
