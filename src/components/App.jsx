@@ -6,6 +6,8 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 import { Api } from '../utils/api';
 import configApi from '../utils/const';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -40,15 +42,15 @@ function App() {
     api.changeLike(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   }
 
-  function handleUpdateUser(name, about){
+  function handleUpdateUser(name, about) {
     api.editProfile(name, about)
-    .then((data)=>{
-      setCurrentUser(data);
-    })
-    .catch(err => console.log(err));
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch(err => console.log(err));
   }
 
   function handleCardDelete(card) {
@@ -59,6 +61,22 @@ function App() {
         });
       })
       .catch(err => console.log(err));
+  }
+
+  function handleUpdateAvatar(link) {
+    api.editProfileAvatar(link)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch(err => console.log(err));
+  }
+
+  function handleAddPlaceSubmit(name, link){
+    api.postNewCard(name, link)
+    .then((newCard)=>{
+      setCards([newCard, ...cards]);
+    })
+    .catch(err => console.log(err));
   }
 
   function handleEditAvatarClick() {
@@ -100,25 +118,11 @@ function App() {
           />
           <Footer />
 
-          <PopupWithForm isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} name='add' title='Новое место' buttonText="Создать">
-            <div className="popup__input-span">
-              <input required minLength="2" maxLength="30" id="form-title" className="popup__input popup__input_profile_name" name="title" type="text" placeholder="Название" />
-              <span id="title-error" className="popup__error"></span>
-            </div>
-            <div className="popup__input-span">
-              <input required id="form-link" className="popup__input popup__input_profile_subtitle" name="link" type="url" placeholder="Ссылка на картинку" />
-              <span id="link-error" className="popup__error"></span>
-            </div>
-          </PopupWithForm>
+          <AddPlacePopup onAddPlaceCard ={handleAddPlaceSubmit} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
 
           <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
-          <PopupWithForm isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} name='avatar' title='Обновить аватар' buttonText="Создать">
-            <div className="popup__input-span">
-              <input required id="form-avatar-link" className="popup__input popup__input_profile_subtitle" name="avatar" type="url" placeholder="Ссылка на картинку" />
-              <span id="avatar-error" className="popup__error"></span>
-            </div>
-          </PopupWithForm>
+          <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
 
           <PopupWithForm name='sure' title='Вы уверены?' onClose={closeAllPopups} buttonText="Да">
           </PopupWithForm>

@@ -51,19 +51,19 @@ class Api {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: link.avatar
+                avatar: link.avatar,
             })
         })
             .then(this._onResponse)
     }
 
-    postNewCard(data) {
+    postNewCard({name, link}) {
         return fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
-                name: data.title,
-                link: data.link
+                name,
+                link,
             })
         })
             .then(this._onResponse)
